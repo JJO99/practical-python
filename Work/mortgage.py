@@ -25,5 +25,4 @@ while principal > 0:
 
     print(month, round(total_paid, 2), round(principal, 2))
 
-print('Total paid', round(total_paid, 2))
-print('Months', month)
+print(f'Total pad: {round(total_paid, 2)}\nMonths: {month}')
