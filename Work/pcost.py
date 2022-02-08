@@ -1,16 +1,19 @@
+import csv
+
+
 def portfolio_cost(filelink):
     total = 0
     checkLine = 0
-    with open(filelink, 'rt') as file:
-        next(file)
-        for line in file:
-            checkLine += 1
-            row = line.split(',')
-            row[2] = row[2].strip('\n')
-            if row[0] == '' or row[1] == '' or row[2] == '':
-                print(f'Line {checkLine} Pass')
-                continue
-            total += int(row[1]) * float(row[2])
+
+    f = open(filelink)
+    rows = csv.reader(f)
+    next(rows)
+    for line in rows:
+        checkLine += 1
+        if line[0] == '' or line[1] == '' or line[2] == '':
+            print(f'Line {checkLine} Pass')
+            continue
+        total += int(line[1]) * float(line[2])
 
     return total
 
