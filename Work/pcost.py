@@ -1,10 +1,15 @@
-total = 0
+def portfolio_cost(filelink):
+    total = 0
 
-with open('./Data/portfolio.csv', 'rt') as file:
-    next(file)
-    for line in file:
-        row = line.split(',')
-        row[2] = row[2].strip('\n')
-        total += int(row[1]) * float(row[2])
+    with open(filelink, 'rt') as file:
+        next(file)
+        for line in file:
+            row = line.split(',')
+            row[2] = row[2].strip('\n')
+            total += int(row[1]) * float(row[2])
 
-print('Total cost: ', total)
+    return total
+
+
+result = portfolio_cost('./Data/portfolio.csv')
+print(result)
