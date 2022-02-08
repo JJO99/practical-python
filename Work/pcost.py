@@ -1,4 +1,5 @@
 import csv
+import sys
 
 
 def portfolio_cost(filelink):
@@ -18,7 +19,15 @@ def portfolio_cost(filelink):
     return total
 
 
-result = portfolio_cost('./Data/portfolio.csv')
-print(f'Total Cost: {result}')
-result = portfolio_cost('./Data/missing.csv')
-print(f'Total Cost: {result}')
+if len(sys.argv) == 2:
+    filename = sys.argv[1]
+else:
+    filename = './Data/portfolio.csv'
+
+cost = portfolio_cost(filename)
+print('Total cost:', cost)
+
+### 이 코드는
+### python3 /Users/(계정명)/PycharmProjects/practical-python/Work/pcost.py /Users/(계정명)/PycharmProjects/practical-python/Work/Data/portfolio.csv
+### 을 터미널에서 실행해야 한다.
+### 파이참에서 그냥 실행하면 결과가 주르륵 나오고, 터미널에서 세번째 인자 없이 실행하면 오류 발생?
