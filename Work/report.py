@@ -9,12 +9,14 @@ def read_portfolio(filename):
     next(rows)
 
     for row in rows:
+        temp = {}
+
         holding = (row[0], int(row[1]), float(row[2]))
-        portfolio.append(holding)
+        temp['name'] = holding[0]
+        temp['shares'] = holding[1]
+        temp['price'] = holding[2]
+        portfolio.append(temp)
 
     return portfolio
 
 ### 인터프리터에서 portfolio = read_portfolio('Data/portfolio.csv') 실행
-### total = 0.0
-### for name, shares, price in portfolio:
-###     total += shares*price
