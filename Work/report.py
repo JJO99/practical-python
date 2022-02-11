@@ -36,9 +36,8 @@ def make_report(port, price):
 
     for x in range(len(portfolio)):
         temp = (portfolio[x]['name'], portfolio[x]['shares'], now[portfolio[x]['name']], round(now[portfolio[x]['name']] - portfolio[x]['price'] , 2))
-        print('%10s %10d %10.2f %10.2f' % temp)
+        print(f'{temp[0]:>10s} {temp[1]:>10d} ${temp[2]:>10.2f} {temp[3]:>10.2f}')
     ##########
-
 
 
 a = make_report('./Data/portfolio.csv', './Data/prices.csv')
