@@ -1,7 +1,7 @@
 import csv
 
 
-def read_prices(port, price):
+def make_report(port, price):
     ##########
     portfolio = []
     f = open(port)
@@ -29,16 +29,9 @@ def read_prices(port, price):
             break
     f.close()
     ##########
-    rev = 0.0
-
     for x in range(len(portfolio)):
-        a = round(portfolio[x]['shares'] * portfolio[x]['price'], 1)
-        b = round(portfolio[x]['shares'] * now[portfolio[x]['name']], 1)
-        print(portfolio[x]['name'], "의 현재가치: ", a)
-        print(portfolio[x]['name'], "의 손익", a - b, "\n")
-        rev += (a - b)
-
-    print("총 수익:", rev)
+        temp = (portfolio[x]['name'], portfolio[x]['shares'], portfolio[x]['price'], round(portfolio[x]['price'] - now[portfolio[x]['name']], 1))
+        print(temp)
 
 
-read_prices('./Data/portfolio.csv', './Data/prices.csv')
+a = make_report('./Data/portfolio.csv', './Data/prices.csv')
