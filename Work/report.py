@@ -1,20 +1,44 @@
 import csv
 
 
-def read_prices(filename):
-    portfolio = {}
+def read_prices(port, price):
+    ##########
+    portfolio = []
+    f = open(port)
+    rows = csv.reader(f)
+    next(rows)
 
-    f = open(filename)
+    for row in rows:
+        temp = {}
+
+        holding = (row[0], int(row[1]), float(row[2]))
+        temp['name'] = holding[0]
+        temp['shares'] = holding[1]
+        temp['price'] = holding[2]
+        portfolio.append(temp)
+    f.close()
+    ##########
+    now = {}
+    f = open(price)
     rows = csv.reader(f)
 
     for row in rows:
         try:
-            portfolio[row[0]] = float(row[1])
+            now[row[0]] = float(row[1])
         except:
             break
+    f.close()
+    ##########
+    rev = 0.0
 
-    return portfolio
+    for x in range(len(portfolio)):
+        a = round(portfolio[x]['shares'] * portfolio[x]['price'], 1)
+        b = round(portfolio[x]['shares'] * now[portfolio[x]['name']], 1)
+        print(portfolio[x]['name'], "의 현재가치: ", a)
+        print(portfolio[x]['name'], "의 손익", a - b, "\n")
+        rev += (a - b)
+
+    print("총 수익:", rev)
 
 
-a = read_prices('./Data/prices.csv')
-print(a)
+read_prices('./Data/portfolio.csv', './Data/prices.csv')
