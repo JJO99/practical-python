@@ -29,8 +29,13 @@ def make_report(port, price):
             break
     f.close()
     ##########
+    headers = ('Name', 'Shares', 'Price', 'Change')
+    print('%10s %10s %10s %10s' % headers)
+    divide = ('----------', '----------', '----------', '-----------')
+    print('%10s %10s %10s %10s' % divide)
+
     for x in range(len(portfolio)):
-        temp = (portfolio[x]['name'], portfolio[x]['shares'], portfolio[x]['price'], round(portfolio[x]['price'] - now[portfolio[x]['name']], 1))
+        temp = (portfolio[x]['name'], portfolio[x]['shares'], now[portfolio[x]['name']], round(now[portfolio[x]['name']] - portfolio[x]['price'] , 2))
         print('%10s %10d %10.2f %10.2f' % temp)
     ##########
 
