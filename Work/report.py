@@ -19,4 +19,5 @@ def read_portfolio(filename):
 
     return portfolio
 
-### 인터프리터에서 portfolio = read_portfolio('Data/portfolio.csv') 실행
+### 인터프리터에서 portfolio = read_portfolio('Data/portfolio.csv') 실행트
+### from pprint import pprint; pprint(portfolio)
