@@ -11,9 +11,10 @@ def portfolio_cost(filelink):
     for count, line in enumerate(rows, start=1):
         record = dict(zip(headers, line))
         try:
-            nshares = int(record['shares'])
+            print('{name}, {date}, {time}, {shares}, {price}'.format_map(record))
+            shares = int(record['shares'])
             price = float(record['price'])
-            total += nshares * price
+            total += shares * price
         except ValueError:
             print(f'Row {count}: Error Occurred - {line}')
 
@@ -23,7 +24,7 @@ def portfolio_cost(filelink):
 if len(sys.argv) == 2:
     filename = sys.argv[1]
 else:
-    filename = './Data/missing.csv'
+    filename = './Data/portfoliodate.csv'
 
 cost = portfolio_cost(filename)
 print('Total cost:', cost)
