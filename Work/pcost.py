@@ -7,10 +7,13 @@ def portfolio_cost(filelink):
 
     f = open(filelink)
     rows = csv.reader(f)
-    next(rows)
+    headers = next(rows)
     for count, line in enumerate(rows, start=1):
+        record = dict(zip(headers, line))
         try:
-            total += int(line[1]) * float(line[2])
+            nshares = int(record['shares'])
+            price = float(record['price'])
+            total += nshares * price
         except ValueError:
             print(f'Row {count}: Error Occurred - {line}')
 
