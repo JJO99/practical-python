@@ -4,7 +4,6 @@ import sys
 
 def portfolio_cost(filelink):
     total = 0
-    checkLine = 0
 
     f = open(filelink)
     rows = csv.reader(f)
