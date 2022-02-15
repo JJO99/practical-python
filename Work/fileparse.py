@@ -1,14 +1,14 @@
 import csv
 
 
-def parse_csv(filename, select=None, types=None, has_header=True):
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','):
     '''
     CSV 파일을 파싱해 레코드의 목록을 생성한다.
     '''
     with open(filename) as f:
-        rows = csv.reader(f)
+        rows = csv.reader(f, delimiter=delimiter)
 
-        if has_header:
+        if has_headers:
             headers = next(rows)  # 헤더를 읽는다.
 
             if select:
@@ -33,7 +33,7 @@ def parse_csv(filename, select=None, types=None, has_header=True):
             else:
                 conv = row   # 형변환 안해도 conv에 집어넣기
 
-            if not has_header:   # 헤더 여부에 따라 _ 없으면 리스트 있으면 딕셔너리
+            if not has_headers:   # 헤더 여부에 따라 _ 없으면 리스트 있으면 딕셔너리
                 record = list(conv)
             else:
                 record = dict(zip(headers, conv))
