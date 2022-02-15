@@ -11,3 +11,7 @@ r = list(zip(types,row))
 converted = []
 for func, val in zip(types, row):
     converted.append(func(val))
+
+#########
+temp = dict(zip(headers,converted))
+temp2 = {name: func(val) for name, func, val in zip(headers, types, row)}
