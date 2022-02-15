@@ -1,7 +1,7 @@
 import csv
 
 
-def parse_csv(filename):
+def parse_csv(filename, select=None):
     '''
     CSV 파일을 파싱해 레코드의 목록을 생성한다.
     '''
@@ -9,6 +9,8 @@ def parse_csv(filename):
         rows = csv.reader(f)
 
         headers = next(rows)   # 헤더를 읽는다.
+        if select:
+            headers = select
         records = []
         for row in rows:
             if not row:  # 데이터가 없는 행은 건너뛴다.
