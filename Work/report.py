@@ -1,7 +1,7 @@
 import csv
 
 
-def make_report(port, price):
+def make_report(port):
     ##########
     portfolio = []
     f = open(port)
@@ -17,7 +17,11 @@ def make_report(port, price):
         temp['price'] = holding[2]
         portfolio.append(temp)
     f.close()
-    ##########
+
+    return portfolio
+
+
+def read_price(price):
     now = {}
     f = open(price)
     rows = csv.reader(f)
@@ -28,7 +32,11 @@ def make_report(port, price):
         except:
             break
     f.close()
-    ##########
+
+    return now
+
+
+def print_report(portfolio, now):
     headers = ('Name', 'Shares', 'Price', 'Change')
     print('%10s %10s %10s %10s' % headers)
     divide = ('----------', '----------', '----------', '-----------')
@@ -37,8 +45,12 @@ def make_report(port, price):
     for x in range(len(portfolio)):
         temp = [portfolio[x]['name'], portfolio[x]['shares'], "$" + str(now[portfolio[x]['name']]), round(now[portfolio[x]['name']] - portfolio[x]['price'] , 2)]
         print(f'{temp[0]:>10s} {temp[1]:>10d} {temp[2]:>10s} {temp[3]:>10.2f}')
-    ##########
-    return portfolio
 
 
-a = make_report('./Data/portfolio.csv', './Data/prices.csv')
+def portfolio_report(port, price):
+    p = make_report(port)
+    n = read_price(price)
+    print_report(p, n)
+
+
+portfolio_report('./Data/portfolio.csv', './Data/prices.csv')
