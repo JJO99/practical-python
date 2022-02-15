@@ -1,7 +1,7 @@
 import csv
 
 
-def parse_csv(filename, select=None):
+def parse_csv(filename, select=None, types=None, has_header=None):
     '''
     CSV 파일을 파싱해 레코드의 목록을 생성한다.
     '''
@@ -16,6 +16,7 @@ def parse_csv(filename, select=None):
             indices = []
 
         records = []
+
         for row in rows:
             if not row:  # 데이터가 없는 행은 건너뛴다.
                 continue
@@ -23,7 +24,12 @@ def parse_csv(filename, select=None):
             if indices:
                 row = [row[index] for index in indices]
 
-            record = dict(zip(headers, row))
+            if types:
+                conv = [func(val) for func, val in zip(types, row)]   # 형변환
+                record = dict(zip(headers, conv))
+            else:
+                record = dict(zip(headers, row))
+
             records.append(record)
 
         return records
