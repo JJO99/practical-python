@@ -1,6 +1,7 @@
 import csv
 
-def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','):
+
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=',', silence_errors=True):
     '''
     CSV 파일을 파싱해 레코드의 목록을 생성한다.
     '''
@@ -46,6 +47,8 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','
                     record = dict(zip(headers, conv))
                     count += 1
             except ValueError as e:
+                if silence_errors:
+                    continue
                 count += 1
                 print(f'Row {count}: Couldn"t convert {row}')
                 print(f'Row {count}: {e}')
